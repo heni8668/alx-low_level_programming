@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * main -entry block
- * @voud : no argument
+ * @void : no argument
  * Return: 0
  */
 int main(void)
