@@ -1,16 +1,4 @@
 #include "main.h"
-/**
-* add - function that adds two integers together
-* @a: takes in an integer
-* @b: takes in an integer
-* Return: a+b result
-*/
-int add(int a, int b)
-{
-return (a + b);
-} 
-..........11-print_to_98.c..........
-#include "main.h"
 #include <stdio.h>
 /** 
 * print_to_98 - functio that prints all natural number from n to 98
