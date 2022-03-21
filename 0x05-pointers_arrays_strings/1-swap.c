@@ -1,15 +1,12 @@
 #include "main.h"
-
-/**
-* main - check the code for Holberton School students.
-* swap_int - swap the number
-* @a - number 
-* @b - number
-* Return: Always 0.
-*/
-void swap_int(int *a, int *b)
-{
-int c = *a;
-*a = *b;
-*b = c;
+/** * swap_int - a function that swaps the values of two integers. 
+* @a: an inout integer pointer 
+* @b: an input integer pointer
+* Return: Nothing */
+void swap_int(int *a, int *b) 
+{ 
+int aux; 
+aux = *a; 
+*a = *b; 
+*b = aux;
 }
