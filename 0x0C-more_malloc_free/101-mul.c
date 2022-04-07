@@ -1,3 +1,8 @@
+/*
+ * File: 101-mul.c
+ * Auth: Imanol Asolo
+ */
+
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
