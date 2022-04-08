@@ -1,31 +1,68 @@
-include "main.h"
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
-#include <string.h>
-/**
- * main - multiplies two positive numbers
- * @argc: n arguments
- * @argv: args
- * Return: int
- */
-int main(int argc, char *argv[])
-{
-unsigned long mul;
-int i, j;
-	if (argc != 3)
-	{ printf("Error\n");
-	exit(98); }
-	for (i = 1; i < argc; i++)
-	{
-		for (j = 0; argv[i][j] != '\0'; j++)
-		{
-			if (argv[i][j] > 57 || argv[i][j] < 48)
-			{  printf("Error\n");
-			exit(98); }
-		}
 
-	}
-	mul = atol(argv[1]) *  atol(argv[2]);
-	printf("%lu\n", mul);
-return (0);
+/**
+*main - multiply two numbers
+*@argc:number of elements to evaluate
+*@argv:array of positive integers
+*Return: an integer
+*/
+int main(argc, **argv)
+{
+l = 1;
+char err[5] = {'E', 'r', 'r', 'o', 'r')
+if (argc != 3)
+{
+for (i = 0; i < 5; i++)
+{
+_putchar(err[i]);
+}
+_putchar('\n');
+exit(98);
+}
+i = 0;
+
+for (j = 1; j < argc; j++)
+{
+for (k = 0; argv[j][k]; k++)
+{
+l++;
+if (argv[j][k] < '0' || argv[j][k] > '9')
+{
+for (i = 0; i < 5; i++)
+{
+_putchar(err[i]);
+}
+_putchar('\n');
+exit(98);
+}
+}
+}
+multi_num(l, argc, **argv);
+return (0)
+}
+/**
+*multi_num - multiply two numbers
+*@c:number of main arguments
+*@p:pointer of pointer
+*Return: new size of the array
+*Return:A pointer to the string with new space in memory
+*/
+
+char  *multi_num(int l, int argc, char **argv)
+{
+char *p;
+
+
+p = malloc((2 * l * sizeof(char)) + 1);
+if (p == NULL)
+	return (NULL);
+
+for (i = 1; i < argc; i++)
+{
+
+p[i] = ((char *)ptr)[i];
+}
+free(ptr);
+return (p);
 }
