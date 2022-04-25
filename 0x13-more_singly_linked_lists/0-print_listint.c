@@ -1,20 +1,20 @@
 #include "lists.h"
 /**
-* print_listint - function
+* listint_len - function
 * @h: string to print
 *
-* Description: Fnction to print all elements in listint_t
+* Description: Fnction to count nodes of the list_t list.
 * Return: number of nodes
 */
-size_t print_listint(const listint_t *h)
+size_t listint_len(const listint_t *h)
 {
-int elements = 0;
+int count = 0;
 
 while (h != NULL)
 {
-printf("%d\n", h->n);
+count++;
 h = h->next;
-elements++;
 }
-return (elements);
+return (count);
 }
+
