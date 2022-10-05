@@ -1,93 +1,87 @@
 #include "search_algos.h"
 
-int binary_search(int *array, size_t size, int value);
-int recurse_helper(int *array, size_t left, size_t right, int value);
+/**
+ * Display_Array - prints the array of ints
+ *
+ * @Arr: a pointer to the array
+ * @Begin: index
+ * @End: last index
+ */
+
+void Display_Array(int *Arr, size_t Begin, size_t End)
+{
+	size_t inc;
+
+	printf("Searching in array: ");
+	for (inc = Begin; inc <= End; inc++)
+	{
+		if (inc != Begin)
+			printf(", ");
+		printf("%d", Arr[inc]);
+	}
+	printf("\n");
+}
 
 /**
- * exponential_search - search array
- * @array: array to search
- * @size: size of array
- * @value: search value
+ * In_between - searches for a value in an array of integers
  *
- * Return: index of matched value; -1 if not found
+ * @Arr: a pointer
+ * @size: number of elements
+ * @value: value to search
+ * @start: first index
+ *
+ * Return: value or -1
  */
+
+int In_between(int *Arr, size_t size, int value, size_t start)
+{
+	size_t first = start, i = 0, last = size - 1;
+
+	if (Arr)
+	{
+		while (first <= last)
+		{
+			Display_Array(Arr, first, last);
+			i = (first + last) / 2;
+
+			if (value > Arr[i])
+				first = i + 1;
+			else if (value < Arr[i])
+				last = i - 1;
+			else
+				return (i);
+		}
+	}
+	return (-1);
+}
+
+/**
+ * exponential_search - searches for a value in an array of integers
+ *
+ * @array: Pointer
+ * @size: Number of elements
+ * @value: Value to search for
+ *
+ * Return: index for searched value ,otherwise -1
+ */
+
 int exponential_search(int *array, size_t size, int value)
 {
-	size_t right = 1, left;
+	size_t inc = 1;
 
-	if (array == NULL)
-		return (-1);
-
-	while (right < size && array[right] < value)
+	if (array)
 	{
-		printf("Value checked array[%lu] = [%d]\n", right, array[right]);
-		right *= 2;
+		while (inc < size && array[inc] < value)
+		{
+			printf("Value checked array[%lu] = [%d]\n", inc, array[inc]);
+			inc *= 2;
+		}
+
+		inc = inc > size - 1 ? size : inc + 1;
+		printf("Value found between indexes [%lu] and [%lu]\n", inc / 2, inc - 1);
+		return (In_between(array, inc, value, inc / 2));
 	}
 
-	if (array[right] == value)
-		return (right);
-
-	left = right / 2; /* establish left bound */
-
-	if (right >= size) /* if right is out of bounds */
-		right = size - 1;
-
-	printf("Value found between indexes [%lu] and [%lu]\n", left, right);
-
-	return (recurse_helper(array, left, right, value));
+	return (-1);
 }
 
-/**
- * binary_search - search for value in array of sorted ints
- * @array: array to search
- * @size: size of array
- * @value: value to search
- *
- * Return: index of found value; or -1 if not found
- */
-int binary_search(int *array, size_t size, int value)
-{
-	if (array == NULL)
-		return (-1);
-
-	return (recurse_helper(array, 0, size - 1, value));
-}
-
-/**
- * recurse_helper - recursive implement of binary search
- * @array: array to search
- * @left: leftmost index
- * @right: rightmost index
- * @value: value to search
- *
- * Return: index of found value; or -1 if not found
- */
-int recurse_helper(int *array, size_t left, size_t right, int value)
-{
-	size_t i = left, mid;
-
-	if (left > right)
-		return (-1);
-
-	/* print search progress */
-	printf("Searching in array: %d", array[i++]);
-	while (i <= right)
-		printf(", %d", array[i++]);
-	printf("\n");
-
-	/* calculate mid */
-	mid = left + ((right - left) / 2);
-
-	/* check if mid is value */
-	if (array[mid] == value)
-		return (mid);
-	else if (array[mid] > value)
-	{
-		if (mid != 0)
-			return (recurse_helper(array, left, mid - 1, value));
-		else
-			return (-1);
-	}
-	else
-		return (recurse_helper(array, mid + 1, right, value));
-}
