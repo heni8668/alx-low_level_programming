@@ -1,65 +1,71 @@
 #include "search_algos.h"
-
-int recurse_helper(int *array, size_t left,
-size_t right, int value, ssize_t *match);
+#include <unistd.h>
+/**
+ * print_array - Current Part process.
+ *
+ * @array: First elem pointer
+ * @first: First elem index
+ * @last: last element to display
+ */
+void print_array(int *array, size_t first, size_t last)
+{
+	printf("Searching in array: %d", array[first]);
+	first++;
+	while (first <= last)
+	{
+		printf(", %d", array[first]);
+		first++;
+	}
+	printf("\n");
+}
 
 /**
- * advanced_binary - search for value in array of sorted ints
- * @array: array to search
- * @size: size of array
- * @value: value to search
+ * advanced_binary_search - In between process
  *
- * Return: index of found value; or -1 if not found
+ * @array: First elem pointer
+ * @start: first element index
+ * @end: number of elements in array
+ * @value: value to search for
+ *
+ * Return: first position of value in array
  */
+
+int advanced_binary_search(int *array, size_t start, size_t end, int value)
+{
+	size_t mid;
+
+	if (end >= start)
+	{
+		print_array(array, start, end);
+
+		if (array[start] == value)
+			return (start);
+
+		mid = (start + end) / 2;
+
+		if (array[mid] == value && array[mid - 1] != value)
+			return (mid);
+		if (array[mid] >= value)
+			return (advanced_binary_search(array, start, mid, value));
+		if (array[mid] < value)
+			return (advanced_binary_search(array, mid + 1, end, value));
+	}
+	return (-1);
+}
+
+/**
+ * advanced_binary - initial process
+ *
+ * @array: pointer
+ * @size: number of elements
+ * @value: Searched value
+ *
+ * Return: index of value or (-1) if not exist
+*/
 int advanced_binary(int *array, size_t size, int value)
 {
-	ssize_t match = -1;
-
-	if (array == NULL)
-		return (-1);
-
-	return (recurse_helper(array, 0, size - 1, value, &match));
+	if (size > 0)
+		return (advanced_binary_search(array, 0, size - 1, value));
+	return (-1);
 }
 
-/**
- * recurse_helper - recursive implement of binary search
- * @array: array to search
- * @left: leftmost index
- * @right: rightmost index
- * @value: value to search
- * @match: pointer to index of most recent match
- *
- * Return: index of found value; or -1 if not found
- */
-int recurse_helper(int *array, size_t left,
-size_t right, int value, ssize_t *match)
-{
-	size_t i = left, mid;
-
-	if (left > right)
-		return (*match);
-
-	/* print search progress */
-	printf("Searching in array: %d", array[i++]);
-	while (i <= right)
-		printf(", %d", array[i++]);
-	printf("\n");
-
-	/* calculate mid */
-	mid = left + ((right - left) / 2);
-
-	/* check if mid is value */
-	if (array[mid] == value)
-	{
-		*match = mid;
-		if (right - left > 1)
-			mid++;
-	}
-	else if (array[mid] < value) /* search right */
-		return (recurse_helper(array, mid + 1, right, value, match));
-
-	if (mid != 0)
-		return (recurse_helper(array, left, mid - 1, value, match));
-	else
-		return (*match);
-}
